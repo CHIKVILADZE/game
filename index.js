@@ -134,8 +134,7 @@ class Game {
         console.log(`Your move: ${userMove}`);
         console.log(`Computer move: ${computerMove}`);
         const result = this.determineWinner(userMove, computerMove);
-        console.log('Hello', userMove, computerMove);
-        console.log('Result', result);
+
         console.log(`HMAC key: ${this.key}`);
         rl.close();
       }
