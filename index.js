@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const Table = require('cli-table3');
 
 class MovesTable {
   constructor(moves) {
@@ -47,14 +48,42 @@ class MovesTable {
   }
 
   displayTable() {
-    const header = '  ' + this.table[0].join('  ');
-    const separator = '-'.repeat(header.length);
-    console.log(header);
-    console.log(separator);
-    for (let i = 1; i <= this.moves.length; i++) {
-      const row = `${this.table[i][0]} | ${this.table[i].join('  ')}`;
-      console.log(row);
+    const table = new Table({
+      head: ['v PCUser > |', ...this.moves], // The first field is left empty to create the vertical header.
+      chars: {
+        top: '',
+        'top-mid': '',
+        'top-left': '',
+        'top-right': '',
+        bottom: '',
+        'bottom-mid': '',
+        'bottom-left': '',
+        'bottom-right': '',
+        left: '|',
+        'left-mid': '',
+        mid: '-',
+        'mid-mid': '',
+        right: '|',
+        'right-mid': '',
+        middle: ' ',
+      },
+      style: { 'padding-left': 0, 'padding-right': 0 },
+    });
+
+    for (let i = 0; i < this.moves.length; i++) {
+      const row = [this.moves[i]];
+      for (let j = 0; j < this.moves.length; j++) {
+        row.push(this.table[i + 1][j + 1]);
+      }
+      table.push(row);
     }
+
+    console.log('Moves Table:');
+    console.log('This table represents the results from your point of view:');
+    console.log(
+      'For example, if you choose "Rock" and PC chooses "Paper", the result is "Lose".\n'
+    );
+    console.log(table.toString());
   }
 }
 
