@@ -119,7 +119,6 @@ class Game {
         rl.close();
         return;
       }
-      console.log('ANSWER', answer);
 
       const moveIndex = parseInt(answer, 10);
       if (isNaN(moveIndex) || moveIndex < 0 || moveIndex > this.moves.length) {
@@ -134,7 +133,7 @@ class Game {
         console.log(`Your move: ${userMove}`);
         console.log(`Computer move: ${computerMove}`);
         const result = this.determineWinner(userMove, computerMove);
-
+        console.log(result);
         console.log(`HMAC key: ${this.key}`);
         rl.close();
       }
